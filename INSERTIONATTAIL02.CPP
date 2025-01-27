@@ -9,7 +9,16 @@ class Node{
         this->data=data;
         this->next=NULL;
     }
-
+    //destructor
+    Node(){
+        int value=this->data;
+        //memoryfree
+        if(this->next!=NULL){
+            delete next;
+            this->next=NULL;
+        }
+        cout<<"Memory is freed for node with data "<<endl;
+    }
 
 };
 void Insertionathead(Node *&head,int d){
@@ -21,8 +30,8 @@ head=temp;
 void Insertionattail(Node *&tail,int d){
 //new node create
 Node* temp=new Node(d);
-tail->next=temp;
-tail=temp;
+tail->next=temp;//tail ke next mn naya node temp daal diya
+tail=temp;//ab temp ko tail bana diya
     }
 void Insertatposition(Node*&tail,Node*&head,int position,int d){
     //inserting at start
@@ -53,11 +62,36 @@ void print(Node*&head){
         }
         cout<<endl;
     }
+void deleteNode(int position,Node*&head){
+    //deleting start or first node
+    if(position==1){
+        Node*temp=head;
+        head=head->next;
+        //memory free start node
+        temp->next=NULL;
+        delete temp;
+    }
+    else{
+        //deleting any middle or last node
+        Node*curr=head;
+        Node*prev=NULL;
+        int cnt=1;
+        while(cnt<position){
+            prev=curr;
+            curr=curr->next;
+            cnt++;
+        }
+        prev->next=curr->next;
+        curr->next=NULL;
+        delete curr;
+    }
+}    
+
 int main(){
     //creation a new node
     Node* node1=new Node(10);
-    Node*head=node1;
-    Node*tail=node1;
+    Node*head=node1;//pointing node 1 in starting
+    Node*tail=node1;//pointing node 1 in starting
     print(head);
     Insertionattail(tail,12);
     print(head);
@@ -67,6 +101,8 @@ Insertatposition(tail,head,1,22);
 print(head);
 cout<<"head "<<head->data<<endl;
 cout<<"tail "<<tail->data<<endl;
+deleteNode(4,head);
+print(head);
     return 0;
 }
 // OUTPUT-
@@ -76,3 +112,4 @@ cout<<"tail "<<tail->data<<endl;
 // 22 10 12 15
 //head 22
 //tail 15 
+//22 10 12
