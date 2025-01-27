@@ -30,8 +30,8 @@ head=temp;
 void Insertionattail(Node *&tail,int d){
 //new node create
 Node* temp=new Node(d);
-tail->next=temp;//tail ke next mn naya node temp daal diya
-tail=temp;//ab temp ko tail bana diya
+tail->next=temp;
+tail=temp;
     }
 void Insertatposition(Node*&tail,Node*&head,int position,int d){
     //inserting at start
@@ -90,8 +90,8 @@ void deleteNode(int position,Node*&head){
 int main(){
     //creation a new node
     Node* node1=new Node(10);
-    Node*head=node1;//pointing node 1 in starting
-    Node*tail=node1;//pointing node 1 in starting
+    Node*head=node1;
+    Node*tail=node1;
     print(head);
     Insertionattail(tail,12);
     print(head);
